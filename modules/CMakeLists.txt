@@ -14,11 +14,17 @@ install(FILES ${mod_files}
         DESTINATION ${KICAD_MODULES}
         COMPONENT resources)
 
-install(DIRECTORY packages3d
-        DESTINATION ${KICAD_MODULES}
-        COMPONENT resources
-        PATTERN ".svn" EXCLUDE)
-
+if( APPLE )
+    install(DIRECTORY packages3d
+            DESTINATION ${KICAD_MODULES}/..
+            COMPONENT resources
+            PATTERN ".svn" EXCLUDE)
+else()
+    install(DIRECTORY packages3d
+            DESTINATION ${KICAD_MODULES}
+            COMPONENT resources
+            PATTERN ".svn" EXCLUDE)
+endif()
 install(DIRECTORY footprints_doc
         DESTINATION ${KICAD_MODULES}
         COMPONENT resources
